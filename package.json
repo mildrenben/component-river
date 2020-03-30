@@ -1,0 +1,8 @@
+{
+  "name": "framer-motion-bobbing-items",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/mildrenben/framer-motion-bobbing-items.git",
+  "author": "Benjamin Mildren <mildrenben@gmail.com>",
+  "license": "MIT"
+}
