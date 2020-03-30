@@ -4,5 +4,9 @@
   "main": "index.js",
   "repository": "https://github.com/mildrenben/framer-motion-bobbing-items.git",
   "author": "Benjamin Mildren <mildrenben@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "peerDependencies": {
+    "react": "^16.8.0",
+    "framer-motion": "^1.0.0"
+  }
 }
