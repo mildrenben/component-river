@@ -73,8 +73,7 @@ const Item = ({
 
   return (
     <motion.div style={initial} animate={animate} transition={transition} className='Item' ref={measuredRef}>
-      {/* <Component {...item} /> */}
-      FOO
+      <Component {...item} />
     </motion.div>
   )
 }
