@@ -1,5 +1,5 @@
 import sass from 'rollup-plugin-sass'
-
+import babel from 'rollup-plugin-babel'
 import pkg from './package.json'
 
 export default {
@@ -15,6 +15,7 @@ export default {
   ],
   plugins: [
     sass({ insert: true }),
+    babel()
   ],
   external: ['react', 'framer-motion', 'prop-types']
 }

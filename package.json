@@ -1,7 +1,7 @@
 {
   "name": "framer-motion-bobbing-items",
   "version": "1.0.0",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "repository": "https://github.com/mildrenben/framer-motion-bobbing-items.git",
   "author": "Benjamin Mildren <mildrenben@gmail.com>",
   "license": "MIT",
@@ -19,7 +19,13 @@
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.0",
+    "@babel/preset-react": "^7.9.4",
+    "prop-types": "^15.7.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "rollup": "^2.3.1",
+    "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-sass": "^1.2.2"
   }
 }
