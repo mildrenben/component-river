@@ -6,7 +6,8 @@
   "author": "Benjamin Mildren <mildrenben@gmail.com>",
   "license": "MIT",
   "peerDependencies": {
-    "react": "^16.8.0",
-    "framer-motion": "^1.0.0"
+    "framer-motion": "^1.0.0",
+    "prop-types": "^15.0.0",
+    "react": "^16.8.0"
   }
 }
