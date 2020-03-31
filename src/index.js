@@ -1,6 +1,6 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import Row from './Row'
+// import PropTypes from 'prop-types'
+// import Row from './Row'
 
 // const BobbingItems = ({ allItems, amountOfRows, yDistanceBetweenRows = 50, Component }) => {
 //   let counter = 0
