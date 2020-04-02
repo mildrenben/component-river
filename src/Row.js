@@ -2,14 +2,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Item from './Item'
 
-const Row = ({ row, ...props }) => {
+const Row = ({ row, reactKey, ...props }) => {
   return row.items.map(
     (item, index) => (
       <Item
         item={item}
         numberInQueue={index}
         yDistanceToTop={row.yDistanceToTop}
-        key={item.key}
+        key={item[reactKey]}
         {...props}
       />
     ))
@@ -19,7 +19,8 @@ Row.propTypes = {
   row: PropTypes.shape({
     items: PropTypes.array.isRequired,
     yDistanceToTop: PropTypes.number.isRequired
-  }).isRequired
+  }).isRequired,
+  reactKey: PropTypes.string.isRequired
 }
 
 export default Row

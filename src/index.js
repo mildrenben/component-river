@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Row from './Row'
 
-const BobbingItems = ({ allItems, amountOfRows, yDistanceBetweenRows = 50, Component }) => {
+const BobbingItems = ({ allItems, amountOfRows, yDistanceBetweenRows = 50, ...props }) => {
   let counter = 0
   const rows = allItems.reduce((accumulator, currentTestimonial) => {
     // If no array exists already, create one
@@ -25,15 +25,15 @@ const BobbingItems = ({ allItems, amountOfRows, yDistanceBetweenRows = 50, Compo
   const rowsWithDistance = rows.map((row, idx) => ({ items: row, yDistanceToTop: idx * yDistanceBetweenRows }))
 
   return (
-    <section className='Testimonials'>
+    <section>
       {
         rowsWithDistance.map(row => (
           <Row
             row={row}
             allItems={allItems}
             yDistanceBetweenRows={yDistanceBetweenRows}
-            Component={Component}
-            key={row.yDistanceBetweenRows}
+            key={row.items[0][props.reactKey]}
+            {...props}
           />
         ))
       }
@@ -45,7 +45,8 @@ BobbingItems.propTypes = {
   allItems: PropTypes.array.isRequired,
   amountOfRows: PropTypes.number.isRequired,
   yDistanceBetweenRows: PropTypes.number,
-  Component: PropTypes.any.isRequired
+  Component: PropTypes.any.isRequired,
+  reactKey: PropTypes.string.isRequired
 }
 
 export default BobbingItems
