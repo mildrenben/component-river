@@ -10,6 +10,7 @@ const Row = ({ row, reactKey, ...props }) => {
         numberInQueue={index}
         yDistanceToTop={row.yDistanceToTop}
         key={item[reactKey]}
+        row={row}
         {...props}
       />
     ))

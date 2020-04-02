@@ -7,7 +7,7 @@ const windowWidth = window.innerWidth
 const Item = ({
   item,
   numberInQueue,
-  allItems,
+  row,
   yDistanceToTop,
   yVariation = 30,
   yDuration = 3,
@@ -16,8 +16,6 @@ const Item = ({
   rowNumber,
   Component
 }) => {
-  const amountOfItems = allItems.length
-
   // Element width
   const [itemWidth, setItemWidth] = useState(500)
   const measuredRef = useCallback(node => {
@@ -39,10 +37,6 @@ const Item = ({
   const distanceToTravel = (windowWidth + itemWidth + (itemWithGapWidth / 2) + (xDistanceBetweenItems / 2))
   // How many seconds it takes to travel a pixel
   const secPerPx = X_DURATION / distanceToTravel
-  // The time for a testimonial to reach the left edge of the screen
-  const timeToLeftEdge = secPerPx * windowWidth
-  // The amount that can fit on screen at one time
-  const amountOnScreenAtOneTime = windowWidth / itemWithGapWidth
 
   const initial = {
     position: 'absolute',
@@ -61,13 +55,15 @@ const Item = ({
     y: yDistanceToTop + yVariation + 'px',
   }
 
+  const repeatDelay = (((secPerPx * itemWithGapWidth) * row.items.length) - X_DURATION)
+
   const transition = {
     x: {
       duration: X_DURATION,
       ease: 'linear',
-      delay: (timeToLeftEdge / amountOnScreenAtOneTime) * numberInQueue,
+      delay: (secPerPx * itemWithGapWidth) * numberInQueue,
       loop: Infinity,
-      repeatDelay: (((timeToLeftEdge / amountOnScreenAtOneTime) * (allItems.length - 1)) + (secPerPx * itemWithGapWidth)) - X_DURATION
+      repeatDelay: repeatDelay < 0 ? 0 : repeatDelay
     },
     y: {
       duration: Y_DURATION,
@@ -88,7 +84,7 @@ Item.propTypes = {
   item: PropTypes.any.isRequired,
   numberInQueue: PropTypes.number.isRequired,
   rowNumber: PropTypes.number.isRequired,
-  allItems: PropTypes.array.isRequired,
+  row: PropTypes.array.isRequired,
   yDistanceToTop: PropTypes.number.isRequired,
   yVariation: PropTypes.number,
   yDuration: PropTypes.number,
