@@ -9,6 +9,9 @@ const Item = ({
   numberInQueue,
   allItems,
   yDistanceToTop,
+  yVariation = 30,
+  yDuration = 3,
+  xDuration = 70,
   Component
 }) => {
   const amountOfItems = allItems.length
@@ -26,11 +29,9 @@ const Item = ({
   const Y_INITIAL = isEven
     ? 40 + (Math.random() * 10)
     : 200 + (Math.random() * 10)
-  const SPEED = 12
-  const X_DURATION = 70 / SPEED
-  const Y_DURATION = 3 / SPEED
-  // How much it moves up and down on the Y axis
-  const Y_VARIATION = 30
+  const SPEED = 1
+  const X_DURATION = xDuration / SPEED
+  const Y_DURATION = yDuration / SPEED
 
   // Total distance a testimonial needs to travel, in px
   const distanceToTravel = (windowWidth + itemWidth)
@@ -52,7 +53,7 @@ const Item = ({
 
   let animate = {
     x: `-${itemWidth}px`,
-    y: yDistanceToTop + Y_VARIATION + 'px',
+    y: yDistanceToTop + yVariation + 'px',
   }
 
   const transition = {
@@ -66,7 +67,7 @@ const Item = ({
     y: {
       duration: Y_DURATION,
       ease: 'easeInOut',
-      delay: numberInQueue === 0 ? 0 : Math.random() * 3,
+      delay: (Math.random() * 3),
       yoyo: Infinity
     }
   }
@@ -83,7 +84,9 @@ Item.propTypes = {
   numberInQueue: PropTypes.number.isRequired,
   allItems: PropTypes.array.isRequired,
   yDistanceToTop: PropTypes.number.isRequired,
-  Component: PropTypes.any.isRequired
+  yVariation: PropTypes.number,
+  yDuration: PropTypes.number,
+  Component: PropTypes.any.isRequired,
 }
 
 export default Item
