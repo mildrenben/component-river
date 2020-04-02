@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import PropTypes from 'prop-types'
 
 const windowWidth = window.innerWidth
+const BASELINE_WINDOW_WIDTH = 1920
 
 const Item = ({
   item,
@@ -11,7 +12,7 @@ const Item = ({
   yDistanceToTop,
   yVariation = 30,
   yDuration = 3,
-  xDuration = 70,
+  xDuration = 20,
   xDistanceBetweenItems = 0,
   rowNumber,
   Component
@@ -23,18 +24,23 @@ const Item = ({
       setItemWidth(node.getBoundingClientRect().width)
     }
   })
+  // Element width including xDistanceBetweenItems
   const itemWithGapWidth = itemWidth + xDistanceBetweenItems
 
+  // Is row on an even number
   const isEvenRow = rowNumber % 2 === 0
-
-  const SPEED = 1
-  // Time it takes to complete 1 loop on the x axis
-  const X_DURATION = xDuration / SPEED
-  // Time it takes to complete 1 loop on the y axis
-  const Y_DURATION = yDuration / SPEED
 
   // Total distance a testimonial needs to travel, in px
   const distanceToTravel = (windowWidth + itemWidth + (itemWithGapWidth / 2) + (xDistanceBetweenItems / 2))
+
+  // Speed modifier
+  const SPEED = 1
+  // Time it takes to complete 1 loop on the x axis
+  const X_DURATION = (distanceToTravel / BASELINE_WINDOW_WIDTH) * (xDuration / SPEED)
+  // Time it takes to complete 1 loop on the y axis
+  const Y_DURATION = yDuration / SPEED
+
+
   // How many seconds it takes to travel a pixel
   const secPerPx = X_DURATION / distanceToTravel
 
