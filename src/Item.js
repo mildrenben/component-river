@@ -18,7 +18,7 @@ const Item = ({
   Component
 }) => {
   // Element width
-  const [itemWidth, setItemWidth] = useState(500)
+  const [itemWidth, setItemWidth] = useState(null)
   const measuredRef = useCallback(node => {
     if (node !== null) {
       setItemWidth(node.getBoundingClientRect().width)
@@ -46,20 +46,18 @@ const Item = ({
 
   const initial = {
     position: 'absolute',
-    width: '500px',
     // change the "start" point depending on whether it's odd/even
     // odd rows start further to the right to offset the entire row slightly
-    x: `calc(100vw + ${isEvenRow ? 0 : (itemWidth / 2) + (xDistanceBetweenItems / 2)}px)`,
+    x: `calc(100vw + ${isEvenRow ? 0 : (xDistanceBetweenItems / 2)}px)`,
     y: yDistanceToTop + 'px',
   }
 
   let animate = {
     // change the "end" point depending on whether it's odd/even row
     // odd rows "end" point is closer as they start an equal distance further away
-    x: `-${itemWidth + (isEvenRow ? (itemWidth / 2) + (xDistanceBetweenItems / 2) : 0)}px`,
+    x: `-${itemWidth + (isEvenRow ? (xDistanceBetweenItems / 2) : 0)}px`,
     y: yDistanceToTop + yVariation + 'px',
   }
-
   const repeatDelay = (((secPerPx * itemWithGapWidth) * row.items.length) - X_DURATION)
 
   const transition = {
