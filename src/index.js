@@ -27,12 +27,13 @@ const BobbingItems = ({ allItems, amountOfRows, yDistanceBetweenRows = 50, ...pr
   return (
     <section>
       {
-        rowsWithDistance.map(row => (
+        rowsWithDistance.map((row, index) => (
           <Row
             row={row}
             allItems={allItems}
             yDistanceBetweenRows={yDistanceBetweenRows}
             key={row.items[0][props.reactKey]}
+            rowNumber={index}
             {...props}
           />
         ))

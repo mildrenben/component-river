@@ -12,10 +12,13 @@ const Item = ({
   yVariation = 30,
   yDuration = 3,
   xDuration = 70,
+  xDistanceBetweenItems = 500,
+  rowNumber,
   Component
 }) => {
   const amountOfItems = allItems.length
 
+  // Element width
   const [itemWidth, setItemWidth] = useState(500)
   const measuredRef = useCallback(node => {
     if (node !== null) {
@@ -23,18 +26,16 @@ const Item = ({
     }
   })
 
-  const isEven = numberInQueue % 2 === 0
+  const isEvenRow = rowNumber % 2 === 0
 
-  const ITEM_WIDTH = itemWidth
-  const Y_INITIAL = isEven
-    ? 40 + (Math.random() * 10)
-    : 200 + (Math.random() * 10)
   const SPEED = 1
+  // Time it takes to complete 1 loop on the x axis
   const X_DURATION = xDuration / SPEED
+  // Time it takes to complete 1 loop on the y axis
   const Y_DURATION = yDuration / SPEED
 
   // Total distance a testimonial needs to travel, in px
-  const distanceToTravel = (windowWidth + itemWidth)
+  const distanceToTravel = (windowWidth + itemWidth + (itemWidth / 2))
   // How many seconds it takes to travel a pixel
   const secPerPx = X_DURATION / distanceToTravel
   // The time for a testimonial to reach the left edge of the screen
@@ -42,17 +43,20 @@ const Item = ({
   // The amount that can fit on screen at one time
   const amountOnScreenAtOneTime = windowWidth / itemWidth
 
-  const X_GAP = 0
-
   const initial = {
     position: 'absolute',
     width: '500px',
-    x: '100vw',
-    y: yDistanceToTop + 'px'
+    // change the "start" point depending on whether it's odd/even
+    // odd rows start further to the right to offset the entire row slightly
+    x: `calc(100vw + ${isEvenRow ? 0 : itemWidth / 2}px)`,
+    y: yDistanceToTop + 'px',
+    background: 'red'
   }
 
   let animate = {
-    x: `-${itemWidth}px`,
+    // change the "end" point depending on whether it's odd/even row
+    // odd rows "end" point is closer as they start an equal distance further away
+    x: `-${itemWidth + (isEvenRow ? itemWidth / 2 : 0)}px`,
     y: yDistanceToTop + yVariation + 'px',
   }
 
@@ -82,6 +86,7 @@ const Item = ({
 Item.propTypes = {
   item: PropTypes.any.isRequired,
   numberInQueue: PropTypes.number.isRequired,
+  rowNumber: PropTypes.number.isRequired,
   allItems: PropTypes.array.isRequired,
   yDistanceToTop: PropTypes.number.isRequired,
   yVariation: PropTypes.number,
