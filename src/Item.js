@@ -15,6 +15,7 @@ const Item = ({
   xDuration = 20,
   xDistanceBetweenItems = 0,
   rowNumber,
+  className,
   Component
 }) => {
   // Element width
@@ -48,14 +49,14 @@ const Item = ({
     position: 'absolute',
     // change the "start" point depending on whether it's odd/even
     // odd rows start further to the right to offset the entire row slightly
-    x: `calc(100vw + ${isEvenRow ? 0 : (xDistanceBetweenItems / 2)}px)`,
+    x: `calc(100vw + ${isEvenRow ? 0 : itemWithGapWidth / 2}px)`,
     y: yDistanceToTop + 'px',
   }
 
   let animate = {
     // change the "end" point depending on whether it's odd/even row
     // odd rows "end" point is closer as they start an equal distance further away
-    x: `-${itemWidth + (isEvenRow ? (xDistanceBetweenItems / 2) : 0)}px`,
+    x: `-${itemWidth + (isEvenRow ? itemWithGapWidth / 2 : 0)}px`,
     y: yDistanceToTop + yVariation + 'px',
   }
   const repeatDelay = (((secPerPx * itemWithGapWidth) * row.items.length) - X_DURATION)
@@ -77,7 +78,13 @@ const Item = ({
   }
 
   return (
-    <motion.div style={initial} animate={animate} transition={transition} className='Item' ref={measuredRef}>
+    <motion.div
+      style={initial}
+      animate={animate}
+      transition={transition}
+      className={className ? `${className}` : null}
+      ref={measuredRef}
+    >
       <Component {...item} />
     </motion.div>
   )
@@ -92,6 +99,7 @@ Item.propTypes = {
   yVariation: PropTypes.number,
   yDuration: PropTypes.number,
   Component: PropTypes.any.isRequired,
+  className: PropTypes.string,
 }
 
 export default Item
