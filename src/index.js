@@ -4,14 +4,14 @@ import Row from './Row'
 
 const BobbingItems = ({ allItems, amountOfRows, yDistanceBetweenRows = 50, ...props }) => {
   let counter = 0
-  const rows = allItems.reduce((accumulator, currentTestimonial) => {
+  const rows = allItems.reduce((accumulator, currentItem) => {
     // If no array exists already, create one
     if (!accumulator[counter]) {
       accumulator[counter] = []
     }
 
     // Add current item to it's row
-    accumulator[counter].push(currentTestimonial)
+    accumulator[counter].push(currentItem)
 
     // Increase/reset counter
     if (counter + 1 === amountOfRows) {
