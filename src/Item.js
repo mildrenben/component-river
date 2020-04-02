@@ -77,12 +77,19 @@ const Item = ({
     }
   }
 
+  let containerClassName
+  if (typeof className === 'string') {
+    containerClassName = className
+  } else if (typeof className === 'function') {
+    containerClassName = className({ rowNumber, numberInQueue })
+  }
+
   return (
     <motion.div
       style={initial}
       animate={animate}
       transition={transition}
-      className={className ? `${className}` : null}
+      className={className ? containerClassName : null}
       ref={measuredRef}
     >
       <Component {...item} />
@@ -99,7 +106,7 @@ Item.propTypes = {
   yVariation: PropTypes.number,
   yDuration: PropTypes.number,
   Component: PropTypes.any.isRequired,
-  className: PropTypes.string,
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
 }
 
 export default Item
