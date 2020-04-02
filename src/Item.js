@@ -45,7 +45,6 @@ const Item = ({
     // odd rows start further to the right to offset the entire row slightly
     x: `calc(100vw + ${isEvenRow ? 0 : (itemWidth / 2) + (xDistanceBetweenItems / 2)}px)`,
     y: yDistanceToTop + 'px',
-    background: 'red'
   }
 
   let animate = {
@@ -84,7 +83,7 @@ Item.propTypes = {
   item: PropTypes.any.isRequired,
   numberInQueue: PropTypes.number.isRequired,
   rowNumber: PropTypes.number.isRequired,
-  row: PropTypes.array.isRequired,
+  row: PropTypes.object.isRequired,
   yDistanceToTop: PropTypes.number.isRequired,
   yVariation: PropTypes.number,
   yDuration: PropTypes.number,
