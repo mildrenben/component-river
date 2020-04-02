@@ -12,7 +12,7 @@ const Item = ({
   yVariation = 30,
   yDuration = 3,
   xDuration = 70,
-  xDistanceBetweenItems = 500,
+  xDistanceBetweenItems = 0,
   rowNumber,
   Component
 }) => {
@@ -25,6 +25,7 @@ const Item = ({
       setItemWidth(node.getBoundingClientRect().width)
     }
   })
+  const itemWithGapWidth = itemWidth + xDistanceBetweenItems
 
   const isEvenRow = rowNumber % 2 === 0
 
@@ -35,20 +36,20 @@ const Item = ({
   const Y_DURATION = yDuration / SPEED
 
   // Total distance a testimonial needs to travel, in px
-  const distanceToTravel = (windowWidth + itemWidth + (itemWidth / 2))
+  const distanceToTravel = (windowWidth + itemWidth + (itemWithGapWidth / 2) + (xDistanceBetweenItems / 2))
   // How many seconds it takes to travel a pixel
   const secPerPx = X_DURATION / distanceToTravel
   // The time for a testimonial to reach the left edge of the screen
   const timeToLeftEdge = secPerPx * windowWidth
   // The amount that can fit on screen at one time
-  const amountOnScreenAtOneTime = windowWidth / itemWidth
+  const amountOnScreenAtOneTime = windowWidth / itemWithGapWidth
 
   const initial = {
     position: 'absolute',
     width: '500px',
     // change the "start" point depending on whether it's odd/even
     // odd rows start further to the right to offset the entire row slightly
-    x: `calc(100vw + ${isEvenRow ? 0 : itemWidth / 2}px)`,
+    x: `calc(100vw + ${isEvenRow ? 0 : (itemWidth / 2) + (xDistanceBetweenItems / 2)}px)`,
     y: yDistanceToTop + 'px',
     background: 'red'
   }
@@ -56,7 +57,7 @@ const Item = ({
   let animate = {
     // change the "end" point depending on whether it's odd/even row
     // odd rows "end" point is closer as they start an equal distance further away
-    x: `-${itemWidth + (isEvenRow ? itemWidth / 2 : 0)}px`,
+    x: `-${itemWidth + (isEvenRow ? (itemWidth / 2) + (xDistanceBetweenItems / 2) : 0)}px`,
     y: yDistanceToTop + yVariation + 'px',
   }
 
@@ -66,12 +67,12 @@ const Item = ({
       ease: 'linear',
       delay: (timeToLeftEdge / amountOnScreenAtOneTime) * numberInQueue,
       loop: Infinity,
-      // repeatDelay: (((timeToLeftEdge / amountOnScreenAtOneTime) * (amountOfHeads - 1)) + (secPerPx * itemWidth)) - X_DURATION
+      repeatDelay: (((timeToLeftEdge / amountOnScreenAtOneTime) * (allItems.length - 1)) + (secPerPx * itemWithGapWidth)) - X_DURATION
     },
     y: {
       duration: Y_DURATION,
       ease: 'easeInOut',
-      delay: (Math.random() * 3),
+      delay: (Math.random() * (yDuration / 2)),
       yoyo: Infinity
     }
   }
