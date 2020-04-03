@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import Row from './Row'
 
-const River = ({ allItems, amountOfRows, yDistanceBetweenRows = 50, ...props }) => {
+const River = ({ allItems, amountOfRows = 1, yDistanceBetweenRows = 50, ...props }) => {
   let counter = 0
   const rows = allItems.reduce((accumulator, currentItem) => {
     // If no array exists already, create one
@@ -52,10 +52,10 @@ const River = ({ allItems, amountOfRows, yDistanceBetweenRows = 50, ...props }) 
 
 River.propTypes = {
   allItems: PropTypes.array.isRequired,
-  amountOfRows: PropTypes.number.isRequired,
-  yDistanceBetweenRows: PropTypes.number,
+  reactKey: PropTypes.string.isRequired,
   Component: PropTypes.any.isRequired,
-  reactKey: PropTypes.string.isRequired
+  amountOfRows: PropTypes.number,
+  yDistanceBetweenRows: PropTypes.number,
 }
 
 export default River
