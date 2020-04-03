@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import Row from './Row'
 
@@ -24,8 +24,16 @@ const River = ({ allItems, amountOfRows, yDistanceBetweenRows = 50, ...props }) 
 
   const rowsWithDistance = rows.map((row, idx) => ({ items: row, yDistanceToTop: idx * yDistanceBetweenRows }))
 
+  // Element width
+  const [itemWidth, setItemWidth] = useState(null)
+  const measuredRef = useCallback(node => {
+    if (node !== null) {
+      setItemWidth(node.getBoundingClientRect().width)
+    }
+  })
+
   return (
-    <section>
+    <section style={{ width: '100%', height: '100%', overflow: 'hidden', position: 'relative' }} ref={measuredRef}>
       {
         rowsWithDistance.map((row, index) => (
           <Row
@@ -33,6 +41,7 @@ const River = ({ allItems, amountOfRows, yDistanceBetweenRows = 50, ...props }) 
             yDistanceBetweenRows={yDistanceBetweenRows}
             key={row.items[0][props.reactKey]}
             rowNumber={index}
+            containerWidth={itemWidth}
             {...props}
           />
         ))
@@ -49,4 +58,4 @@ River.propTypes = {
   reactKey: PropTypes.string.isRequired
 }
 
-export default BobbingItems
+export default River

@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react'
-import { motion } from 'framer-motion'
+import { motion, useAnimation } from 'framer-motion'
 import PropTypes from 'prop-types'
 
 const windowWidth = window.innerWidth
@@ -16,7 +16,8 @@ const Item = ({
   xDistanceBetweenItems = 0,
   rowNumber,
   className,
-  Component
+  Component,
+  containerWidth
 }) => {
   // Element width
   const [itemWidth, setItemWidth] = useState(null)
@@ -25,6 +26,10 @@ const Item = ({
       setItemWidth(node.getBoundingClientRect().width)
     }
   })
+
+  // Default to window width
+  containerWidth = containerWidth || windowWidth
+
   // Element width including xDistanceBetweenItems
   const itemWithGapWidth = itemWidth + xDistanceBetweenItems
 
@@ -32,7 +37,7 @@ const Item = ({
   const isEvenRow = rowNumber % 2 === 0
 
   // Total distance a testimonial needs to travel, in px
-  const distanceToTravel = (windowWidth + itemWidth + (itemWithGapWidth / 2) + (xDistanceBetweenItems / 2))
+  const distanceToTravel = (containerWidth + itemWidth + (itemWithGapWidth / 2) + (xDistanceBetweenItems / 2))
 
   // Speed modifier
   const SPEED = 1
@@ -49,7 +54,7 @@ const Item = ({
     position: 'absolute',
     // change the "start" point depending on whether it's odd/even
     // odd rows start further to the right to offset the entire row slightly
-    x: `calc(100vw + ${isEvenRow ? 0 : itemWithGapWidth / 2}px)`,
+    x: `calc(${containerWidth}px + ${isEvenRow ? 0 : itemWithGapWidth / 2}px)`,
     y: yDistanceToTop + 'px',
   }
 
@@ -107,6 +112,7 @@ Item.propTypes = {
   yDuration: PropTypes.number,
   Component: PropTypes.any.isRequired,
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+  containerWidth: PropTypes.number
 }
 
 export default Item
