@@ -2,6 +2,9 @@ html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
+  color: #282c47;
+  padding-bottom: 200px;
 }
 body {
   margin: 0;
@@ -200,7 +203,7 @@ html {
 }
 body {
   color: hsla(0, 0%, 0%, 0.8);
-  font-family: georgia, serif;
+  font-family: sans-serif;
   font-weight: normal;
   word-wrap: break-word;
   font-kerning: normal;
@@ -619,4 +622,8 @@ pre tt:after {
   html {
     font-size: 100%;
   }
+}
+
+h1,h2,h3,h4,h5,h6 {
+  font-family: Catamaran, sans-serif;
 }
