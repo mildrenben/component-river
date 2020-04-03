@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Row from './Row'
 
-const BobbingItems = ({ allItems, amountOfRows, yDistanceBetweenRows = 50, ...props }) => {
+const River = ({ allItems, amountOfRows, yDistanceBetweenRows = 50, ...props }) => {
   let counter = 0
   const rows = allItems.reduce((accumulator, currentItem) => {
     // If no array exists already, create one
@@ -41,7 +41,7 @@ const BobbingItems = ({ allItems, amountOfRows, yDistanceBetweenRows = 50, ...pr
   )
 }
 
-BobbingItems.propTypes = {
+River.propTypes = {
   allItems: PropTypes.array.isRequired,
   amountOfRows: PropTypes.number.isRequired,
   yDistanceBetweenRows: PropTypes.number,

@@ -1,8 +1,8 @@
 {
-  "name": "framer-motion-bobbing-items",
+  "name": "component-river",
   "version": "1.0.0",
   "main": "dist/index.js",
-  "repository": "https://github.com/mildrenben/framer-motion-bobbing-items.git",
+  "repository": "https://github.com/mildrenben/component-river.git",
   "author": "Benjamin Mildren <mildrenben@gmail.com>",
   "license": "MIT",
   "files": [
