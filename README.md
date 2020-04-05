@@ -2,7 +2,7 @@
 
 ## Examples and documentation site
 
-TODO: Add docs site when on github pages
+[Link](https://mildrenben.github.io/component-river/)
 
 TODO: Add "pause" function and document. Add to advanced example
 
