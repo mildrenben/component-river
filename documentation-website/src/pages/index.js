@@ -2,9 +2,9 @@ import React from "react"
 import River from 'component-river'
 import { motion, useAnimation } from 'framer-motion'
 import Layout from "../components/layout"
-import { Button, SimpleGrid, Heading, Code, Text, Flex, Stack, Box, Badge } from '@chakra-ui/core'
-import SyntaxHighlighter from 'react-syntax-highlighter';
-import BasicExample from '../components/BasicExample'
+import { Link as ChakraLink, Button, Heading, Code, Text, Box, Badge } from '@chakra-ui/core'
+import { Link as GatsbyLink } from 'gatsby'
+import Props from '../components/Props'
 import './index.css'
 
 const DATA = [
@@ -94,8 +94,20 @@ const IndexPage = () => {
         <Heading as='h3' size='md' mt='30px'>Import</Heading>
         <Code>import River from 'component-river'</Code>
       </Box>
+      <Box as='section' maxW={960} mt='80px' mx='auto' px='20px'>
+        <Heading>Basic Example</Heading>
+        <ChakraLink as={GatsbyLink} to='/basic'><Button variantColor='blue'>Example</Button></ChakraLink>
+      </Box>
       <Box as='section' maxW={960} mt='80px' mx='auto'>
-        <BasicExample />
+        <Props />
+      </Box>
+      <Box as='section' maxW={960} mt='80px' mx='auto'>
+        <Heading>Advanced Example</Heading>
+        <ChakraLink as={GatsbyLink} to='/advanced'><Button variantColor='blue'>Example</Button></ChakraLink>
+      </Box>
+      <Box as='section' maxW={960} mt='80px' mx='auto'>
+        <Heading>Check the code!</Heading>
+        <ChakraLink href='https://github.com/mildrenben/component-river'><Button>Github</Button></ChakraLink>
       </Box>
     </Layout>
   )
