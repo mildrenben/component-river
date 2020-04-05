@@ -93,6 +93,7 @@ const IndexPage = () => {
         <Code>yarn add component-river</Code>
         <Heading as='h3' size='md' mt='30px'>Import</Heading>
         <Code>import River from 'component-river'</Code>
+        <Text mt='30px'><Badge variantColor='red' mr={2} px={2}>!</Badge>Add a height and width to your containing element. The items are positioned absolutely (with overflow hidden!), so the container needs a width and height.</Text>
       </Box>
       <Box as='section' maxW={960} mt='80px' mx='auto' px='20px'>
         <Heading>Basic Example</Heading>

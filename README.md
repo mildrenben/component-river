@@ -1,5 +1,11 @@
 # Component River
 
+## Examples and documentation site
+
+TODO: Add docs site when on github pages
+
+TODO: Add "pause" function and document. Add to advanced example
+
 ## Usage
 
 WARNING: `framer-motion` is a peer dependency and must be installed if you do not already have it
@@ -9,6 +15,8 @@ Install:
 
 Import:
 `import River from 'component-river'`
+
+Add a height and width to your containing element. The items are positioned absolutely (with overflow hidden!), so the container needs a width and height.
 
 ## Basic Example
 
@@ -53,13 +61,29 @@ const BasicExampleComponent = ({ label }) => <div>{label}</div>
 | xDuration             |          | Number (s)       | 20      | How long it takes each item to move across the screen in seconds. (This amount is based on a 1920px width screen, it gets changed automatically to keep the same "speed" if the screen is smaller) |
 | className             |          | String or Func   |         | A className for the container that wraps your Component. If you pass a function, that function will receive { rowNumber, numberInQueue } as arguments. When using a function, return a string.     |
 
+## How it splits your items
 
+The array of items you pass is split up into rows. It divides them equally across rows as if it were dealing out playing cards. It does not split the deck in half and give the first half to row 1 and then the second half to row 2.
 
-Explain how it splits arrays
+It does this so that when you're calling API data and you get an array of items in chronological order, the most recent items appear furthest left.
 
-Explain how it loops items. 0 if not enough items
+For example:
 
-Add overflow-x: hidden to html
+```javascript
+  const DATA = [{ key: 1 }, { key: 2 }, { key: 3 }...]
+```
+Given 3 rows, the above `DATA` becomes this:
+```javascript
+  1    4    7
+    2   5     8
+  3    6    9
+```
+
+## How it loops
+
+Component river will automatically loop through your items and each item will "wait" until it's their time to restart their loop. These times change depending on the screen width, so it calculates these times based on `window` width.
+
+If there are not enough items to keep a consistent stream of items, the items will not wait to restart their loop to try and minimise any gap between the "end" of row and the "start".
 
 ## Contributing
 
@@ -72,12 +96,11 @@ Once these are done, you can fire it up as follows:
 - `yarn start` at the top level. This will watch and rebuild changes to the component in `src` as you make them.
 - `yarn start` in `/documentation-website`. You can now test your changes in the examples/documentation website and use it as a playground.
 
-
-TODO
+### Todo
 - LTR support
 - Top to bottom/bottom to top support
-- minus xDistanceBetween items
-- Offset odd rows option
+- minus xDistanceBetweenItems items to have some 'overlap'
+- Offset odd rows prop option (ability to turn it off altogether)
 
-BUGS
+### Known bugs
 - The first item in an odd row moves incorrectly along the x-axis slightly, unsure why
