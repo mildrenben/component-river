@@ -81,7 +81,7 @@ Given 3 rows, the above `DATA` becomes this:
 
 ## How it loops
 
-Component river will automatically loop through your items and each item will "wait" until it's their time to restart their loop. These times change depending on the screen width, so it calculates these times based on `window` width.
+Component river will automatically loop through your items and each item will "wait" until it's their time to restart their loop. These times change depending on the screen width, so it calculates these times based on `window.innerWidth`.
 
 If there are not enough items to keep a consistent stream of items, the items will not wait to restart their loop to try and minimise any gap between the "end" of row and the "start".
 

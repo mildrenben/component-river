@@ -1,9 +1,6 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
 import { motion, useAnimation } from 'framer-motion'
 import PropTypes from 'prop-types'
-
-const windowWidth = window.innerWidth
-const BASELINE_WINDOW_WIDTH = 1920
 
 const Item = ({
   item,
@@ -19,6 +16,13 @@ const Item = ({
   Component,
   containerWidth
 }) => {
+  // Window width
+  let windowWidth = 0
+  const BASELINE_WINDOW_WIDTH = 1920
+  useEffect(() => {
+    windowWidth = window.innerWidth
+  }, [])
+
   // Element width
   const [itemWidth, setItemWidth] = useState(null)
   const measuredRef = useCallback(node => {
