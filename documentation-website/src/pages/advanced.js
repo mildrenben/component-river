@@ -3,6 +3,7 @@ import { Heading, Box } from '@chakra-ui/core'
 import River from 'component-river'
 import { Men, Women } from '../components/UserAvatars'
 import Layout from '../components/layout'
+import SyntaxHighlighter from 'react-syntax-highlighter'
 import './advanced.scss'
 
 const DATA = [
@@ -103,6 +104,52 @@ const AdvancedExample = () => (
         xDistanceBetweenItems={200}
         xDuration={20}
       />
+    </Box>
+    <Box as='section' maxW={960} mt='80px' mx='auto' px='20px'>
+      <SyntaxHighlighter>
+        {`
+        const DATA = [
+          {
+            name: 'J Bloggs',
+            testimonial: 'Amazing work, highly recommend!'
+          }
+          ...,
+          ...,
+        ]
+
+      const Testimonial = ({ name, testimonial }) => {
+        const randomGender = Math.round(Math.random()) ? Men : Women
+        const randomNumber = Math.floor((Math.random() * 4))
+      
+        return (
+          <>
+            <span className='FloatingHead_avatar'>{randomGender[randomNumber]()}</span> // this selects a random avatar
+            <div className='FloatingHead_textWrap'>
+              <div className='FloatingHead_textBackground'>
+                <span className='FloatingHead_name'>{name}</span>
+                <span className='FloatingHead_testimonial'>{testimonial}</span>
+              </div>
+            </div>
+          </>
+        )
+      }
+      
+      const AdvancedExample = () => (
+        <River
+          allItems={DATA}
+          reactKey='name'
+          Component={Testimonial}
+          className='FloatingHead'
+          amountOfRows={3}
+          yDistanceBetweenRows={150}
+          yVariation={20}
+          yDuration={3}
+          xDistanceBetweenItems={200}
+          xDuration={20}
+        />
+      )
+      `}
+      </SyntaxHighlighter>
     </Box>
   </Layout>
 )
