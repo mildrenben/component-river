@@ -91,6 +91,7 @@ const Item = ({
     containerClassName = className
   } else if (typeof className === 'function') {
     containerClassName = className({ rowNumber, numberInQueue })
+    containerClassName = className({ rowNumber, numberInQueue, item })
   }
 
   return (
