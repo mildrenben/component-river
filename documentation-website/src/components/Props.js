@@ -14,7 +14,7 @@ const propsMarkdown = `
 | yDuration             |          | Number (s)       | 3       | How long it takes an item to go from top of curve to bottom in seconds                                                                                                                             |
 | xDistanceBetweenItems |          | Number (px)      | 0       | Distance between each item horizontally in pixels                                                                                                                                                  |
 | xDuration             |          | Number (s)       | 20      | How long it takes each item to move across the screen in seconds. (This amount is based on a 1920px width screen, it gets changed automatically to keep the same "speed" if the screen is smaller) |
-| className             |          | String or Func   |         | A className for the container that wraps your Component. If you pass a function, that function will receive { rowNumber, numberInQueue } as arguments. When using a function, return a string.     |
+| className             |          | String or Func   |         | A className for the container that wraps your Component. If you pass a function, that function will receive { rowNumber, numberInQueue, item } as arguments. When using a function, return a string.     |
 `
 
 const Props = () => (
